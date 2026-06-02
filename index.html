@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0ea5e9" />
+    <title>Meu Gerenciador</title>
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="app-title">
+        <h1>Meu Gerenciador</h1>
+        <p class="subtitle">Finanças diárias</p>
+      </div>
+      <button id="installBtn" class="btn btn-secondary" type="button" hidden>
+        Instalar
+      </button>
+    </header>
+
+    <main class="container">
+      <section class="card card-balance" aria-label="Painel de saldo">
+        <div class="balance-grid">
+          <div class="stat">
+            <div class="stat-label">Entradas</div>
+            <div id="totalIn" class="stat-value">R$ 0,00</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Saídas</div>
+            <div id="totalOut" class="stat-value">R$ 0,00</div>
+          </div>
+          <div class="stat stat-highlight">
+            <div class="stat-label">Saldo</div>
+            <div id="balance" class="stat-value stat-balance">R$ 0,00</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-label="Adicionar movimentação">
+        <h2 class="card-title">Novo lançamento</h2>
+
+        <form id="txForm" class="form">
+          <label class="field">
+            <span class="field-label">Descrição</span>
+            <input
+              id="desc"
+              name="desc"
+              type="text"
+              placeholder="Ex: Salário, Supermercado, Cinema"
+              autocomplete="off"
+              maxlength="60"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Valor</span>
+            <input
+              id="amount"
+              name="amount"
+              type="number"
+              inputmode="decimal"
+              min="0.01"
+              step="0.01"
+              placeholder="0,00"
+              required
+            />
+          </label>
+
+          <div class="form-row">
+            <fieldset class="field half">
+              <legend class="field-label">Tipo</legend>
+              <div class="radio-row" role="radiogroup" aria-label="Tipo de movimentação">
+                <label class="radio">
+                  <input type="radio" name="type" value="in" checked />
+                  <span>Entrada</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="type" value="out" />
+                  <span>Saída</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="field half">
+              <span class="field-label">Categoria</span>
+              <select id="category" name="category" class="category-select">
+                <option value="">Sem categoria</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Adicionar</button>
+          <p id="formError" class="form-error" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="card" aria-label="Gerenciar categorias">
+        <div class="card-header">
+          <h2 class="card-title">Categorias</h2>
+          <button id="addCategoryBtn" class="btn btn-secondary" type="button">
+            + Nova
+          </button>
+        </div>
+        
+        <div id="categoriesContainer" class="categories-container"></div>
+      </section>
+
+      <section class="card" aria-label="Histórico de transações">
+        <div class="card-header">
+          <h2 class="card-title">Histórico</h2>
+          <div class="filter-group">
+            <select id="filterCategory" class="filter-select">
+              <option value="">Todas categorias</option>
+            </select>
+            <button id="clearBtn" class="btn btn-danger" type="button" hidden>
+              Limpar tudo
+            </button>
+          </div>
+        </div>
+
+        <ul id="txList" class="tx-list" aria-label="Lista de transações"></ul>
+        <p id="emptyState" class="empty-state">Nenhum lançamento ainda.</p>
+      </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="categoryModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle">Nova Categoria</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <label class="field">
+            <span class="field-label">Nome da categoria</span>
+            <input type="text" id="categoryName" placeholder="Ex: Alimentação, Transporte, Lazer" maxlength="30" />
+          </label>
+          <label class="field">
+            <span class="field-label">Cor</span>
+            <input type="color" id="categoryColor" value="#6366f1" />
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button id="saveCategoryBtn" class="btn btn-primary">Salvar</button>
+          <button id="cancelCategoryBtn" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <small>
+        ©2026 - J. G. Nunes Coelho 
+      </small>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
