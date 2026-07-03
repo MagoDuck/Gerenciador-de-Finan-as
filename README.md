@@ -1,1 +1,1 @@
-https://readme-typing-svg.herokuapp.com/?color=00bfbf&size=35&center=true&vCenter=true&width=1000&lines=Ol%C3%A1,+seja+bem-vindo+ao+meu+perfil!;Sou+Desenvolvedor+Full+Stack;Apaixonado+por+Tecnologia+e+Inova%C3%A7%C3%A3o;Vamos+codar!+%F0%9F%92%BB
+
